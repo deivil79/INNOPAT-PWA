@@ -4,7 +4,7 @@
 
 Prototipo funcional mobile-first preparado para GitHub Pages y para servir posteriormente como frontend desacoplado de OpenCms.
 
-Esta variante parte del demostrador de David Parrilla y aplica la auditoría documentada en [`docs/AUDITORIA_Y_HOJA_DE_RUTA.md`](docs/AUDITORIA_Y_HOJA_DE_RUTA.md). No declara conformidad legal: su objetivo es proporcionar una base más rigurosa para la validación.
+Esta variante parte del demostrador de DP y aplica la auditoría documentada en [`docs/AUDITORIA_Y_HOJA_DE_RUTA.md`](docs/AUDITORIA_Y_HOJA_DE_RUTA.md). No declara conformidad legal: su objetivo es proporcionar una base más rigurosa para la validación.
 
 ## Cambios principales
 
