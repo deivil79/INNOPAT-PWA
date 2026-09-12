@@ -61,6 +61,11 @@ img{max-width:100%;display:block}
 .institutional-support-inner{text-align:center}
 .institutional-support-inner>.eyebrow{margin-bottom:18px}
 .institutional-support img{display:block;width:min(100%,720px);max-width:720px;height:auto;margin:0 auto;object-fit:contain;border-radius:18px}
+.institutional-logos{display:flex;justify-content:center;align-items:stretch;gap:22px;flex-wrap:wrap}
+.institutional-logo{min-width:280px;display:flex;align-items:center;justify-content:center;gap:16px;padding:20px 24px;border:1px solid var(--line);text-align:left;background:#fff}
+.institutional-logo strong{font-family:Georgia,serif;font-size:1.35rem;color:#006b3c}
+.institutional-logo span{border-left:2px solid #006b3c;padding-left:16px;line-height:1.25}
+.iaph-logo strong{font-size:2rem;letter-spacing:.04em}
 
 .hero{min-height:620px;position:relative;display:grid;align-items:end;overflow:hidden;background:var(--navy)}
 .hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -223,7 +228,7 @@ img{max-width:100%;display:block}
 .qr-help summary{font-weight:800;color:var(--ink);cursor:pointer}
 .map-poi-label{background:var(--navy);color:#fff;border:2px solid #fff;border-radius:999px;min-width:34px;height:34px;display:grid;place-items:center;font-weight:900;box-shadow:0 3px 10px rgba(0,0,0,.25)}
 @media(max-width:620px){
-  .segmented{width:100%;display:grid;grid-template-columns:repeat(3,1fr);border-radius:15px}
+  .segmented{width:100%;display:grid;grid-template-columns:repeat(2,1fr);border-radius:15px}
   .segment{padding:10px 8px;border-radius:11px;font-size:.88rem}
   .google-map-canvas{min-height:55vh}
 }

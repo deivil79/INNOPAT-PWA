@@ -14,7 +14,7 @@ Fortalezas reutilizables:
 - PWA básica, estado local, GPS voluntario y lector QR.
 - Avisos claros de que contenidos y posiciones son provisionales.
 
-Decisión recomendada: mantener la arquitectura estática y el modelo de datos, simplificar el flujo principal y terminar primero dos hitos reales. No añadir más funciones hasta validar el recorrido físico y los contenidos.
+Decisión actualizada: mantener la arquitectura estática y el modelo de datos, simplificar el flujo principal y trabajar ya con los once hitos. La publicación sigue siendo provisional hasta validar el recorrido físico y los contenidos.
 
 La variante incorpora Leaflet 1.9.4 con teselas estándar de OpenStreetMap como mapa de contexto sin clave. La carga es voluntaria, conserva la atribución visible y no precarga teselas. Para producción deberá revisarse el volumen previsto y, si crece, contratarse o desplegarse un servicio de teselas con garantías adecuadas.
 
@@ -70,4 +70,4 @@ La variante incorpora Leaflet 1.9.4 con teselas estándar de OpenStreetMap como 
 
 ## Dictamen
 
-La base de David Parrilla merece conservarse como demostrador técnico. Su mayor valor es haber convertido la documentación en algo navegable con rapidez. Su principal debilidad es haber avanzado horizontalmente por muchas funciones antes de cerrar verticalmente dos hitos reales. La siguiente inversión debe ir a profundidad y validación, no a sumar mapas, idiomas o efectos.
+La base de DP merece conservarse como demostrador técnico. Su mayor valor es haber convertido la documentación en algo navegable con rapidez. La nueva versión mantiene ese alcance de once hitos y concentra la siguiente inversión en profundidad, validación física, contenidos y pruebas de accesibilidad.

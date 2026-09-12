@@ -1,12 +1,13 @@
 [
   {
     "id": "H01",
+    "coordinates": { "lat": 37.39701417163231, "lng": -6.007182557417988 },
     "slug": "puerta-principal",
     "order": 1,
     "title": "Puerta Principal",
     "subtitle": "Territorio, contexto y recorrido histórico",
     "summary": "Bienvenida al conjunto y lectura del territorio, seguida de un recorrido por las principales transformaciones históricas de La Cartuja.",
-    "locationText": "Puerta principal del Monasterio. Posición exacta pendiente de validación.",
+    "locationText": "Puerta principal del Monasterio. Coordenada aportada por el equipo INNOPAT.",
     "duration": "4–6 min",
     "status": "draft",
     "mainContent": [
@@ -30,12 +31,13 @@
   },
   {
     "id": "H02",
+    "coordinates": { "lat": 37.39841929697682, "lng": -6.008847365720662 },
     "slug": "capilla-afuera-porteria",
     "order": 2,
     "title": "Capilla de Afuera y la Portería",
     "subtitle": "El umbral del silencio y la vida cartuja",
     "summary": "El límite entre el exterior y la clausura permite explicar el aislamiento, la devoción y la organización de la vida cartujana.",
-    "locationText": "Capilla de Afuera y Portería. Posición exacta pendiente de validación.",
+    "locationText": "Capilla de Afuera y Portería. Coordenada aportada por el equipo INNOPAT.",
     "duration": "4–5 min",
     "status": "draft",
     "mainContent": [
@@ -61,12 +63,13 @@
   },
   {
     "id": "H03",
+    "coordinates": { "lat": 37.39840292227165, "lng": -6.008370830354135 },
     "slug": "atrio-portada-iglesia",
     "order": 3,
     "title": "Del Atrio de Entrada a la Portada de la Iglesia",
     "subtitle": "La vida intramuros",
     "summary": "Espacios productivos, de servicio y de gestión que ayudan a entender el funcionamiento cotidiano del monasterio.",
-    "locationText": "Del atrio de entrada a la portada de la iglesia. Trazado exacto pendiente de validación.",
+    "locationText": "Del atrio de entrada a la portada de la iglesia. Coordenada aportada por el equipo INNOPAT.",
     "duration": "5–6 min",
     "status": "draft",
     "mainContent": [
@@ -86,12 +89,13 @@
   },
   {
     "id": "H04",
+    "coordinates": { "lat": 37.39843106155593, "lng": -6.007847000073313 },
     "slug": "portada-iglesia-capillas",
     "order": 4,
     "title": "La Portada de la Iglesia y sus Capillas Anexas",
     "subtitle": "El rescate arqueológico, Colón y el barroco",
     "summary": "Arqueología, restauración y memoria histórica en la portada de la iglesia y sus capillas anexas.",
-    "locationText": "Portada de la iglesia y capillas anexas. Posición exacta pendiente de validación.",
+    "locationText": "Portada de la iglesia y capillas anexas. Coordenada aportada por el equipo INNOPAT.",
     "duration": "6–7 min",
     "status": "draft",
     "mainContent": [
@@ -112,12 +116,13 @@
   },
   {
     "id": "H05",
+    "coordinates": { "lat": 37.3984480226904, "lng": -6.007289416414129 },
     "slug": "interior-iglesia-santa-ana",
     "order": 5,
     "title": "El Interior de la Iglesia y la Capilla de Santa Ana",
     "subtitle": "De templo a secadero de loza",
     "summary": "La transformación de un espacio litúrgico en parte del complejo industrial de Pickman.",
-    "locationText": "Interior de la iglesia y Capilla de Santa Ana. Acceso pendiente de validación.",
+    "locationText": "Interior de la iglesia y Capilla de Santa Ana. Coordenada aportada por el equipo INNOPAT.",
     "duration": "5–6 min",
     "status": "draft",
     "mainContent": [
@@ -136,12 +141,13 @@
   },
   {
     "id": "H06",
+    "coordinates": { "lat": 37.3983061565508, "lng": -6.007607695548607 },
     "slug": "sacristia-claustrillo",
     "order": 6,
     "title": "La Sacristía, Claustrillo y Dependencias Anexas",
     "subtitle": "El núcleo noble y la memoria funeraria",
     "summary": "Sacristía, claustrillo, refectorio, capillas y sala capitular concentran arte, memoria funeraria y distintas fases históricas.",
-    "locationText": "Sacristía, Claustrillo y dependencias anexas. Recorrido exacto pendiente de validación.",
+    "locationText": "Sacristía, Claustrillo y dependencias anexas. Coordenada aportada por el equipo INNOPAT.",
     "duration": "7–8 min",
     "status": "draft",
     "mainContent": [
@@ -161,12 +167,13 @@
   },
   {
     "id": "H07",
+    "coordinates": { "lat": 37.39868397092451, "lng": -6.007339573743469 },
     "slug": "claustron",
     "order": 7,
     "title": "El Claustrón",
     "subtitle": "El espacio de las celdas y la huella industrial",
     "summary": "El gran claustro permite explicar la vida individual de los cartujos y su transformación posterior durante la etapa fabril.",
-    "locationText": "Claustrón y entorno de las antiguas celdas. Posición exacta pendiente de validación.",
+    "locationText": "Claustrón y entorno de las antiguas celdas. Coordenada aportada por el equipo INNOPAT.",
     "duration": "5–6 min",
     "status": "draft",
     "mainContent": [
@@ -185,12 +192,13 @@
   },
   {
     "id": "H08",
+    "coordinates": { "lat": 37.39860754096028, "lng": -6.007973079604698 },
     "slug": "casa-prior",
     "order": 8,
     "title": "La Casa del Prior",
     "subtitle": "La residencia independiente",
     "summary": "La residencia del prior permite explicar gobierno, representación y diferenciación funcional dentro del conjunto monástico.",
-    "locationText": "Casa del Prior y claustro asociado. Posición exacta pendiente de validación.",
+    "locationText": "Casa del Prior y claustro asociado. Coordenada aportada por el equipo INNOPAT.",
     "duration": "3–4 min",
     "status": "draft",
     "mainContent": [
@@ -209,12 +217,13 @@
   },
   {
     "id": "H09",
+    "coordinates": { "lat": 37.39920128346507, "lng": -6.007683019621216 },
     "slug": "huertas",
     "order": 9,
     "title": "Las Huertas",
     "subtitle": "El espacio agrícola y productivo",
     "summary": "Las huertas permiten leer la dimensión agrícola del monasterio y las transformaciones de la etapa industrial.",
-    "locationText": "Huertas y jardines históricos. Posición exacta pendiente de validación.",
+    "locationText": "Huertas y jardines históricos. Coordenada aportada por el equipo INNOPAT.",
     "duration": "4–5 min",
     "status": "draft",
     "mainContent": [
@@ -233,12 +242,13 @@
   },
   {
     "id": "H10",
+    "coordinates": { "lat": 37.39798033699596, "lng": -6.008066189223903 },
     "slug": "ombu",
     "order": 10,
     "title": "El Ombú",
     "subtitle": "El árbol botánico e histórico",
     "summary": "Un ejemplar vegetal singular conecta paisaje, intercambios atlánticos y memoria colombina.",
-    "locationText": "Ombú de los jardines del monasterio. Posición exacta pendiente de validación.",
+    "locationText": "Ombú de los jardines del monasterio. Coordenada aportada por el equipo INNOPAT.",
     "duration": "3–4 min",
     "status": "draft",
     "mainContent": [
@@ -256,12 +266,13 @@
   },
   {
     "id": "H11",
+    "coordinates": { "lat": 37.39765305172443, "lng": -6.007332347630011 },
     "slug": "claustro-legos",
     "order": 11,
     "title": "Claustro de Legos",
     "subtitle": "El corazón operativo y actual del IAPH",
     "summary": "Cierre del recorrido en un espacio ligado a los hermanos legos y actualmente integrado en la sede del IAPH.",
-    "locationText": "Claustro de Legos, sede del IAPH. Posición exacta pendiente de validación.",
+    "locationText": "Claustro de Legos, sede del IAPH. Coordenada aportada por el equipo INNOPAT.",
     "duration": "4–5 min",
     "status": "draft",
     "mainContent": [

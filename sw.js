@@ -1,5 +1,5 @@
 
-const CACHE = "innopat-shell-accessible-v1";
+const CACHE = "innopat-shell-accessible-v4";
 const CORE = [
   "./",
   "./index.html",
@@ -8,6 +8,8 @@ const CORE = [
   "./config.js",
   "./manifest.webmanifest",
   "./content/hitos.json",
+  "./content/hitos.en.json",
+  "./content/hitos.fr.json",
   "./assets/icon-192.svg",
   "./assets/icon-512.svg"
 ];

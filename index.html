@@ -22,7 +22,12 @@
       </a>
 
       <div class="header-actions">
-        <span class="language-status" lang="es">ES</span>
+        <label class="sr-only" for="languageSelect">Idioma</label>
+        <select class="compact-control" id="languageSelect" aria-label="Idioma">
+          <option value="es">ES · Español</option>
+          <option value="en">EN · English</option>
+          <option value="fr">FR · Français</option>
+        </select>
         <button class="icon-btn" id="qrOpen" type="button" aria-haspopup="dialog" aria-controls="qrDialog">
           <span aria-hidden="true">▣</span><span class="hide-small"> Escanear QR</span>
         </button>
@@ -62,7 +67,7 @@
         </div>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#recorrido">Comenzar visita <span aria-hidden="true">→</span></a>
-          <a class="btn btn-ghost" href="#plano">Explorar el plano</a>
+          <a class="btn btn-ghost" href="#mapa-contexto" id="exploreMapLink">Explorar el mapa</a>
         </div>
       </div>
     </section>
@@ -88,7 +93,6 @@
         </div>
         <div class="segmented" role="group" aria-label="Cambiar vista">
           <button type="button" class="segment is-active" id="listViewBtn" aria-pressed="true">Lista</button>
-          <button type="button" class="segment" id="mapViewBtn" aria-pressed="false">Plano</button>
           <button type="button" class="segment" id="leafletViewBtn" aria-pressed="false">Mapa</button>
         </div>
       </div>
@@ -97,37 +101,12 @@
         <ol id="hitosGrid" class="hitos-grid" aria-label="Listado de 11 hitos"></ol>
       </div>
 
-      <div id="mapView" hidden>
-        <div class="map-card" id="plano">
-          <div class="map-copy">
-            <p class="map-label">PLANO INTERPRETATIVO · PROTOTIPO</p>
-            <h3>Monasterio de Santa María de las Cuevas</h3>
-            <p>Plano esquemático sin escala. Las posiciones definitivas de los 11 hitos deben validarse sobre el terreno con IAPH/CAAC.</p>
-          </div>
-
-          <svg class="route-map" viewBox="0 0 800 520" role="img" aria-labelledby="mapTitle mapDesc">
-            <title id="mapTitle">Plano esquemático con once hitos</title>
-            <desc id="mapDesc">Representación conceptual del recorrido. La lista de hitos ofrece una alternativa equivalente y accesible.</desc>
-            <path class="building" d="M70 80h250v90h120V60h285v170H610v220H340v-100H70z"></path>
-            <path class="courtyard" d="M150 150h150v110H150z"></path>
-            <path class="courtyard" d="M470 120h170v120H470z"></path>
-            <path class="route-line" d="M120 115 C210 100,230 205,335 200 S475 110,550 170 S670 260,590 330 S430 420,300 365 S160 385,120 320"></path>
-            <g id="mapMarkers"></g>
-          </svg>
-
-          <div class="map-actions">
-            <button id="geoBtn" class="btn btn-secondary" type="button">Usar mi ubicación</button>
-            <p id="geoStatus" class="helper" role="status">La ubicación no se solicita automáticamente.</p>
-          </div>
-        </div>
-      </div>
-
       <div id="leafletView" hidden>
         <div class="map-card">
           <div class="map-copy">
             <p class="map-label">MAPA DE CONTEXTO · OPENSTREETMAP</p>
             <h3>Situación del Monasterio de la Cartuja</h3>
-            <p id="leafletDescription">El mapa ayuda a reconocer el entorno exterior. Las paradas interiores solo se mostrarán cuando sus coordenadas hayan sido validadas. El listado y el plano ofrecen la navegación accesible principal.</p>
+            <p id="leafletDescription">El mapa muestra los 11 hitos a partir de las coordenadas facilitadas por el equipo. El listado ofrece una alternativa equivalente y accesible.</p>
           </div>
           <div id="leafletConsent" class="map-consent">
             <p>Al cargar el mapa, el navegador solicitará las teselas directamente a OpenStreetMap. No se enviará tu ubicación.</p>
@@ -176,10 +155,10 @@
   <section class="institutional-support" aria-label="Entidades que financian y desarrollan INNOPAT">
     <div class="shell institutional-support-inner">
       <p class="eyebrow dark">INSTITUCIONES DEL PROYECTO</p>
-      <img
-        src="https://parri98.github.io/INNOPAT_Pruebas/assets/brand/logos-junta-financia-desarrolla.jpg"
-        alt="Financia: Junta de Andalucía, Consejería de Sanidad, Presidencia y Emergencias, Centro de Estudios Andaluces. Desarrolla: Junta de Andalucía, Consejería de Cultura y Deporte, Instituto Andaluz del Patrimonio Histórico."
-      >
+      <div class="institutional-logos" role="group" aria-label="Instituciones del proyecto">
+        <div class="institutional-logo"><strong>Junta de Andalucía</strong><span>Consejería de Cultura,<br>Patrimonio Histórico y Deporte</span></div>
+        <div class="institutional-logo iaph-logo"><strong>IAPH</strong><span>Instituto Andaluz<br>del Patrimonio Histórico</span></div>
+      </div>
     </div>
   </section>
 
@@ -187,11 +166,11 @@
     <div class="shell footer-grid">
       <div>
         <strong>INNOPAT · Guía de visita</strong>
-        <p>Prototipo funcional PWA · Monasterio de Santa María de las Cuevas. · Versión 3.4.0</p>
+        <p>Prototipo funcional PWA · Monasterio de Santa María de las Cuevas · Versión 4.0.0</p>
       </div>
       <nav aria-label="Enlaces de pie">
         <a href="#recorrido">Recorrido</a>
-        <a href="#plano">Plano</a>
+        <a href="#mapa-contexto" id="footerMapLink">Mapa</a>
         <button class="link-button" id="a11yOpenFooter" type="button">Accesibilidad</button>
         <button class="link-button" id="statementOpen" type="button">Declaración de accesibilidad</button>
         <button class="link-button" id="privacyOpen" type="button">Privacidad</button>

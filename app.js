@@ -13,7 +13,9 @@
     activeIndex: 0,
     visited: new Set(readStored("innopat.visited", [])),
     prefs: readStored("innopat.prefs", {}),
-    lang: "es",
+    lang: ["es","en","fr"].includes(new URLSearchParams(location.search).get("lang"))
+      ? new URLSearchParams(location.search).get("lang")
+      : readStored("innopat.lang", "es"),
     googleMap: null,
     googleMarkers: [],
     userMarker: null,
@@ -44,7 +46,7 @@
   const t = {
     es: {
       visited: (n,total)=>`${n} de ${total} hitos visitados`,
-      next:"Ir al siguiente hito", list:"Lista", map:"Plano",
+      next:"Ir al siguiente hito", list:"Lista", map:"Mapa",
       geoIdle:"La ubicación no se solicita automáticamente.",
       geoRequest:"Solicitando ubicación…",
       geoOk:(a)=>`Ubicación obtenida. Precisión aproximada: ±${Math.round(a)} m. No se guarda.`,
@@ -86,6 +88,40 @@
     }
   };
 
+  const ui = {
+    es: {skip:"Saltar al contenido",hero:"La Cartuja, paso a paso",lead:"Una guía web accesible para descubrir el patrimonio a tu ritmo, sin instalar ninguna aplicación.",start:"Comenzar visita →",explore:"Explorar el mapa",route:"Elige cómo continuar",routeHelp:"Mapa y listado ofrecen la misma información. El GPS es opcional y nunca bloquea la visita.",mapTitle:"Los 11 hitos de La Cartuja",mapDescription:"El mapa muestra los 11 hitos a partir de las coordenadas facilitadas por el equipo. El listado ofrece una alternativa equivalente y accesible.",mapConsent:"Al cargar el mapa, el navegador solicitará las teselas directamente a OpenStreetMap. No se enviará tu ubicación.",loadMap:"Cargar mapa",locate:"Mostrar mi ubicación",finish:"Cuando termines, cuéntanos tu experiencia",survey:"Abrir encuesta",online:"Con conexión",offline:"Sin conexión · modo básico"},
+    en: {skip:"Skip to content",hero:"La Cartuja, step by step",lead:"An accessible web guide to discover the site at your own pace, without installing an app.",start:"Start visit →",explore:"Explore the map",route:"Choose how to continue",routeHelp:"Map and list provide the same information. GPS is optional and never blocks the visit.",mapTitle:"The 11 stops at La Cartuja",mapDescription:"The map shows all 11 stops using coordinates supplied by the team. The list is an equivalent accessible alternative.",mapConsent:"When you load the map, your browser requests tiles directly from OpenStreetMap. Your location is not sent.",loadMap:"Load map",locate:"Show my location",finish:"When you finish, tell us about your experience",survey:"Open survey",online:"Online",offline:"Offline · basic mode"},
+    fr: {skip:"Aller au contenu",hero:"La Cartuja, pas à pas",lead:"Un guide web accessible pour découvrir le patrimoine à votre rythme, sans installer d’application.",start:"Commencer la visite →",explore:"Explorer la carte",route:"Choisissez comment continuer",routeHelp:"La carte et la liste fournissent les mêmes informations. Le GPS est facultatif et ne bloque jamais la visite.",mapTitle:"Les 11 étapes de La Cartuja",mapDescription:"La carte affiche les 11 étapes à partir des coordonnées fournies par l’équipe. La liste constitue une alternative accessible équivalente.",mapConsent:"Au chargement, le navigateur demande les tuiles directement à OpenStreetMap. Votre position n’est pas envoyée.",loadMap:"Charger la carte",locate:"Afficher ma position",finish:"À la fin, partagez votre expérience",survey:"Ouvrir l’enquête",online:"En ligne",offline:"Hors ligne · mode de base"}
+  };
+
+  const uiNodes = [
+    [".project-intro-copy strong","Conoce INNOPAT","Discover INNOPAT","Découvrir INNOPAT"],
+    [".project-intro-copy h2","Investigar, conservar y hacer comprensible el patrimonio","Researching, conserving and making heritage understandable","Étudier, conserver et rendre le patrimoine compréhensible"],
+    [".project-intro-copy p","INNOPAT utiliza el Monasterio de Santa María de las Cuevas como laboratorio de innovación patrimonial y mediación cultural inclusiva. Esta web es un prototipo de la experiencia digital de visita.","INNOPAT uses the Monastery of Santa María de las Cuevas as a laboratory for heritage innovation and inclusive cultural interpretation. This website is a prototype of the digital visitor experience.","INNOPAT utilise le monastère de Santa María de las Cuevas comme laboratoire d’innovation patrimoniale et de médiation culturelle inclusive. Ce site est un prototype de l’expérience numérique de visite."],
+    [".btn-project","Conocer el proyecto ↗","About the project ↗","Découvrir le projet ↗"],
+    ["#visitStatusTitle","Tu recorrido","Your route","Votre parcours"],
+    [".feature-grid article:nth-child(1) h2","Accesibilidad desde el diseño","Accessibility by design","L’accessibilité dès la conception"],
+    [".feature-grid article:nth-child(1) p","Teclado, lectores de pantalla, contraste, reflow y alternativas al mapa, vídeo y 3D forman parte de la experiencia base.","Keyboard access, screen readers, contrast, reflow and alternatives to maps, video and 3D are part of the core experience.","Clavier, lecteurs d’écran, contraste, réagencement et alternatives à la carte, à la vidéo et à la 3D font partie de l’expérience de base."],
+    [".feature-grid article:nth-child(2) h2","Ligera y preparada para PWA","Lightweight and PWA-ready","Légère et prête pour la PWA"],
+    [".feature-grid article:nth-child(3) h2","Privacidad por defecto","Privacy by default","Confidentialité par défaut"],
+    [".finish-card > p:not(.eyebrow)","La encuesta definitiva se conectará a la herramienta institucional aprobada para el proyecto.","The final survey will be connected to the institutional tool approved for the project.","L’enquête définitive sera reliée à l’outil institutionnel approuvé pour le projet."],
+    ["#videoTitle","Vídeo de la parada","Stop video","Vidéo de l’étape"],
+    ["#loadVideoBtn","Cargar vídeo de YouTube","Load YouTube video","Charger la vidéo YouTube"],
+    ["#transcriptPanel h3","Transcripción","Transcript","Transcription"],
+    [".detail-main h3","Contenido principal","Main content","Contenu principal"],
+    [".detail-science h3","Una mirada técnica","A technical perspective","Un regard technique"],
+    [".detail-anecdote h3","Historias para interpretar","Stories to interpret","Histoires à interpréter"],
+    [".detail-extra h3","Explora más","Explore more","En savoir plus"],
+    [".detail-block:not(.detail-main):not(.detail-science):not(.detail-anecdote):not(.detail-extra) h3","Cómo encontrar este lugar","How to find this place","Comment trouver ce lieu"],
+    ["#prevHitoBtn","← Anterior","← Previous","← Précédente"],
+    ["#nextHitoBtn","Siguiente →","Next →","Suivante →"],
+    ["#a11yPanel h2","Accesibilidad","Accessibility","Accessibilité"],
+    ["#resetPrefs","Restablecer preferencias","Reset preferences","Réinitialiser les préférences"],
+    ["#qrDialog h2","Escanear código QR","Scan QR code","Scanner un code QR"],
+    ["#startQrBtn","Abrir cámara","Open camera","Ouvrir la caméra"],
+    ["#stopQrBtn","Detener cámara","Stop camera","Arrêter la caméra"]
+  ];
+
   const $ = (s, root=document) => root.querySelector(s);
   const $$ = (s, root=document) => [...root.querySelectorAll(s)];
 
@@ -96,7 +132,8 @@
 
   async function loadContent() {
     try {
-      const response = await fetch(config.contentEndpoint || "./content/hitos.json", {cache:"no-store"});
+      const endpoint = state.lang === "es" ? (config.contentEndpoint || "./content/hitos.json") : `./content/hitos.${state.lang}.json`;
+      const response = await fetch(endpoint, {cache:"no-store"});
       if (!response.ok) throw new Error("content");
       const data = await response.json();
       state.hitos = Array.isArray(data) && data.length ? data : fallbackHitos;
@@ -108,7 +145,6 @@
 
   function renderAll() {
     renderCards();
-    renderMapMarkers();
     updateProgress();
     applyPrefs();
     applyLanguage();
@@ -172,7 +208,6 @@
     progress.value = done;
     progress.textContent = `${done} de ${total}`;
     renderCardsVisitedOnly();
-    $$(".map-marker").forEach((m, idx) => m.classList.toggle("is-visited", state.visited.has(state.hitos[idx]?.id)));
   }
 
   function renderCardsVisitedOnly() {
@@ -259,20 +294,16 @@
   function toggleViews(view) {
     const selected = view || "list";
     $("#listView").hidden = selected !== "list";
-    $("#mapView").hidden = selected !== "plan";
     $("#leafletView").hidden = selected !== "leaflet";
     const pairs = [
       ["#listViewBtn", selected === "list"],
-      ["#mapViewBtn", selected === "plan"]
-      ,["#leafletViewBtn", selected === "leaflet"]
+      ["#leafletViewBtn", selected === "leaflet"]
     ];
     pairs.forEach(([sel,on]) => {
       $(sel).classList.toggle("is-active", on);
       $(sel).setAttribute("aria-pressed", String(on));
     });
-    if (selected === "plan") {
-      history.replaceState(null,"","#plano");
-    } else if (selected === "leaflet") {
+    if (selected === "leaflet") {
       history.replaceState(null,"","#mapa-contexto");
       if (state.leafletMap) setTimeout(() => state.leafletMap.invalidateSize(), 0);
     }
@@ -314,7 +345,9 @@
       $("#leafletConsent").hidden = true;
       $("#leafletMap").hidden = false;
       $("#leafletLocationBtn").disabled = false;
-      status.textContent = "Mapa cargado. No hay coordenadas interiores validadas todavía.";
+      const bounds = state.hitos.filter(h => h.coordinates).map(h => [h.coordinates.lat,h.coordinates.lng]);
+      if (bounds.length) state.leafletMap.fitBounds(bounds, {padding:[34,34], maxZoom:18});
+      status.textContent = state.lang === "es" ? "Mapa cargado con los 11 hitos." : state.lang === "en" ? "Map loaded with all 11 stops." : "Carte chargée avec les 11 étapes.";
       setTimeout(() => state.leafletMap.invalidateSize(), 0);
       return state.leafletMap;
     } catch {
@@ -668,17 +701,38 @@
 
   function applyLanguage() {
     document.documentElement.lang = state.lang;
+    $("#languageSelect").value = state.lang;
     $("#continueBtn").textContent = t[state.lang].next;
     $("#listViewBtn").textContent = t[state.lang].list;
-    $("#mapViewBtn").textContent = t[state.lang].map;
+    $("#leafletViewBtn").textContent = t[state.lang].map;
     $("#listenBtn").textContent = t[state.lang].listen;
+    const v = ui[state.lang];
+    $(".skip-link").textContent = v.skip;
+    $("#heroTitle").textContent = v.hero;
+    $(".hero-lead").textContent = v.lead;
+    $(".hero-actions .btn-primary").textContent = v.start;
+    $("#exploreMapLink").textContent = v.explore;
+    $("#routeTitle").textContent = v.route;
+    $(".section-head > div:first-child > p:last-child").textContent = v.routeHelp;
+    $("#leafletView .map-copy h3").textContent = v.mapTitle;
+    $("#leafletDescription").textContent = v.mapDescription;
+    $("#leafletConsent p").textContent = v.mapConsent;
+    $("#loadLeafletBtn").textContent = v.loadMap;
+    $("#leafletLocationBtn").textContent = v.locate;
+    $("#finishTitle").textContent = v.finish;
+    $("#surveyBtn").textContent = v.survey;
+    const langIndex = state.lang === "es" ? 1 : state.lang === "en" ? 2 : 3;
+    uiNodes.forEach(([selector,...values]) => {
+      const node = $(selector);
+      if (node) node.textContent = values[langIndex - 1];
+    });
     updateProgress();
   }
 
   function updateOnline() {
     const online = navigator.onLine;
     $("#onlineDot").classList.toggle("is-offline", !online);
-    $("#onlineText").textContent = online ? "Con conexión" : "Sin conexión · modo básico";
+    $("#onlineText").textContent = online ? ui[state.lang].online : ui[state.lang].offline;
   }
 
   function escapeHtml(value="") {
@@ -690,9 +744,17 @@
 
     $("#continueBtn").addEventListener("click", continueVisit);
     $("#listViewBtn").addEventListener("click", () => toggleViews("list"));
-    $("#mapViewBtn").addEventListener("click", () => toggleViews("plan"));
     $("#leafletViewBtn").addEventListener("click", () => toggleViews("leaflet"));
-    $("#geoBtn").addEventListener("click", requestGeo);
+    $("#exploreMapLink").addEventListener("click", () => toggleViews("leaflet"));
+    $("#footerMapLink").addEventListener("click", () => toggleViews("leaflet"));
+    $("#languageSelect").addEventListener("change", async e => {
+      state.lang = e.target.value;
+      localStorage.setItem("innopat.lang", JSON.stringify(state.lang));
+      const url = new URL(location.href);
+      url.searchParams.set("lang", state.lang);
+      history.replaceState(null, "", url);
+      await loadContent();
+    });
     $("#loadLeafletBtn").addEventListener("click", initLeafletMap);
     $("#leafletLocationBtn").addEventListener("click", showLeafletLocation);
 

@@ -2,6 +2,20 @@
 
 Las versiones publicadas se conservan como hitos estables del prototipo.
 
+## [4.0.0] — 2026-09-12
+### Añadido
+- Coordenadas de los 11 hitos importadas del KML facilitado por el equipo.
+- Mapa Leaflet/OpenStreetMap con los 11 marcadores y ajuste automático de encuadre.
+- Contenidos de los 11 hitos traducidos al inglés y al francés.
+- Selector ES/EN/FR con persistencia local y URL compartible.
+- Borrador de encuesta de visita basado en la estructura metodológica de VESTIGIUM.
+
+### Cambiado
+- El selector de recorrido queda reducido a Lista y Mapa.
+- Se retira el plano SVG conceptual.
+- La identificación pública del demostrador original pasa a «DP».
+- El bloque institucional identifica la Consejería de Cultura, Patrimonio Histórico y Deporte y el IAPH.
+
 ## [3.4.0] — 2026-09-12
 ### Añadido
 - Se incorpora temporalmente el mismo vídeo de YouTube como vídeo principal en las 11 paradas.
