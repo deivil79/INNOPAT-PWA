@@ -1,0 +1,25 @@
+{
+  "name": "INNOPAT · La Cartuja · Guía de visita",
+  "short_name": "INNOPAT",
+  "description": "Guía web accesible para la visita al Monasterio de Santa María de las Cuevas.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f2ea",
+  "theme_color": "#006b3c",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "./assets/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

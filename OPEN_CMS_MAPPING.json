@@ -1,0 +1,19 @@
+{
+  "OpenCms_Hito": {
+    "id": "string",
+    "slug": "string",
+    "order": "number",
+    "title": "string",
+    "summary": "rich text/plain text",
+    "locationText": "string",
+    "heroImage": "URL",
+    "mainVideo": "URL or object",
+    "duration": "string",
+    "transcript": "HTML/plain text",
+    "captions": "WebVTT URL",
+    "easyRead": "optional HTML/plain text",
+    "pills": "array",
+    "model3d": "optional object {enabled,url,poster,description}",
+    "rights": "string"
+  }
+}

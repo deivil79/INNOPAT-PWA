@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#173249">
+  <meta name="description" content="Prototipo PWA accesible INNOPAT para la visita al Monasterio de Santa María de las Cuevas, Sevilla.">
+  <meta name="color-scheme" content="light">
+  <title>INNOPAT · La Cartuja · Guía de visita</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header" aria-label="Cabecera principal">
+    <div class="topbar shell">
+      <a class="brand-link brand-link-logo" href="#inicio" aria-label="INNOPAT, volver al inicio">
+        <img class="brand-logo" src="https://parri98.github.io/INNOPAT_Pruebas/assets/brand/innopat-logo.png" alt="INNOPAT">
+        <span class="brand-sub">Guía de visita · IAPH</span>
+      </a>
+
+      <div class="header-actions">
+        <span class="language-status" lang="es">ES</span>
+        <button class="icon-btn" id="qrOpen" type="button" aria-haspopup="dialog" aria-controls="qrDialog">
+          <span aria-hidden="true">▣</span><span class="hide-small"> Escanear QR</span>
+        </button>
+        <button class="icon-btn" id="a11yOpen" type="button" aria-haspopup="dialog" aria-controls="a11yPanel">
+          <span aria-hidden="true">Aa</span><span class="hide-small"> Accesibilidad</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="project-intro" aria-label="Información sobre el proyecto INNOPAT">
+    <div class="shell project-intro-inner">
+      <div class="project-intro-copy">
+        <span class="project-intro-mark" aria-hidden="true">✦</span>
+        <div>
+          <strong>Conoce INNOPAT</strong>
+          <h2>Investigar, conservar y hacer comprensible el patrimonio</h2>
+          <p>INNOPAT utiliza el Monasterio de Santa María de las Cuevas como laboratorio de innovación patrimonial y mediación cultural inclusiva. Esta web es un prototipo de la experiencia digital de visita.</p>
+        </div>
+      </div>
+      <a class="btn btn-project" href="https://www.juntadeandalucia.es/organismos/iaph/servicios/actualidad/noticias/detalle/645106.html" target="_blank" rel="noopener">
+        Conocer el proyecto <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <main id="main">
+    <section class="hero" id="inicio" aria-labelledby="heroTitle">
+      <img id="heroImage" class="hero-image" src="https://www.juntadeandalucia.es/sites/default/files/2026-02/Monasterio.jpg" alt="Monasterio de Santa María de las Cuevas, sede del IAPH en Sevilla">
+      <div class="hero-overlay"></div>
+      <div class="hero-content shell">
+        <p class="eyebrow">MONASTERIO DE SANTA MARÍA DE LAS CUEVAS · SEVILLA</p>
+        <h1 id="heroTitle">La Cartuja, paso a paso</h1>
+        <p class="hero-lead">Una guía web accesible para descubrir el patrimonio a tu ritmo, sin instalar ninguna aplicación.</p>
+        <div class="hero-meta" role="group" aria-label="Información de la visita">
+          <span>11 hitos</span><span aria-hidden="true">·</span><span>ruta lineal o libre</span><span aria-hidden="true">·</span><span>sin registro</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#recorrido">Comenzar visita <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#plano">Explorar el plano</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit-status shell" aria-labelledby="visitStatusTitle">
+      <div>
+        <p class="eyebrow dark">MI VISITA</p>
+        <h2 id="visitStatusTitle">Tu recorrido</h2>
+        <p id="progressText">0 de 11 hitos visitados</p>
+      </div>
+      <div class="status-tools">
+        <progress class="progress" id="progressBar" value="0" max="11">0 de 11</progress>
+        <button id="continueBtn" class="btn btn-secondary" type="button">Ir al siguiente hito</button>
+      </div>
+    </section>
+
+    <section class="section shell" id="recorrido" aria-labelledby="routeTitle">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow dark">RECORRIDO</p>
+          <h2 id="routeTitle">Elige cómo continuar</h2>
+          <p>Mapa y listado ofrecen la misma información. El GPS es opcional y nunca bloquea la visita.</p>
+        </div>
+        <div class="segmented" role="group" aria-label="Cambiar vista">
+          <button type="button" class="segment is-active" id="listViewBtn" aria-pressed="true">Lista</button>
+          <button type="button" class="segment" id="mapViewBtn" aria-pressed="false">Plano</button>
+          <button type="button" class="segment" id="leafletViewBtn" aria-pressed="false">Mapa</button>
+        </div>
+      </div>
+
+      <div id="listView">
+        <ol id="hitosGrid" class="hitos-grid" aria-label="Listado de 11 hitos"></ol>
+      </div>
+
+      <div id="mapView" hidden>
+        <div class="map-card" id="plano">
+          <div class="map-copy">
+            <p class="map-label">PLANO INTERPRETATIVO · PROTOTIPO</p>
+            <h3>Monasterio de Santa María de las Cuevas</h3>
+            <p>Plano esquemático sin escala. Las posiciones definitivas de los 11 hitos deben validarse sobre el terreno con IAPH/CAAC.</p>
+          </div>
+
+          <svg class="route-map" viewBox="0 0 800 520" role="img" aria-labelledby="mapTitle mapDesc">
+            <title id="mapTitle">Plano esquemático con once hitos</title>
+            <desc id="mapDesc">Representación conceptual del recorrido. La lista de hitos ofrece una alternativa equivalente y accesible.</desc>
+            <path class="building" d="M70 80h250v90h120V60h285v170H610v220H340v-100H70z"></path>
+            <path class="courtyard" d="M150 150h150v110H150z"></path>
+            <path class="courtyard" d="M470 120h170v120H470z"></path>
+            <path class="route-line" d="M120 115 C210 100,230 205,335 200 S475 110,550 170 S670 260,590 330 S430 420,300 365 S160 385,120 320"></path>
+            <g id="mapMarkers"></g>
+          </svg>
+
+          <div class="map-actions">
+            <button id="geoBtn" class="btn btn-secondary" type="button">Usar mi ubicación</button>
+            <p id="geoStatus" class="helper" role="status">La ubicación no se solicita automáticamente.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="leafletView" hidden>
+        <div class="map-card">
+          <div class="map-copy">
+            <p class="map-label">MAPA DE CONTEXTO · OPENSTREETMAP</p>
+            <h3>Situación del Monasterio de la Cartuja</h3>
+            <p id="leafletDescription">El mapa ayuda a reconocer el entorno exterior. Las paradas interiores solo se mostrarán cuando sus coordenadas hayan sido validadas. El listado y el plano ofrecen la navegación accesible principal.</p>
+          </div>
+          <div id="leafletConsent" class="map-consent">
+            <p>Al cargar el mapa, el navegador solicitará las teselas directamente a OpenStreetMap. No se enviará tu ubicación.</p>
+            <button id="loadLeafletBtn" class="btn btn-secondary" type="button">Cargar mapa</button>
+          </div>
+          <section id="leafletMap" class="leaflet-map" aria-label="Mapa interactivo del entorno del Monasterio de la Cartuja" aria-describedby="leafletDescription" hidden></section>
+          <div class="map-actions">
+            <button id="leafletLocationBtn" class="btn btn-secondary" type="button" disabled>Mostrar mi ubicación</button>
+            <p id="leafletStatus" class="helper" role="status">El mapa aún no se ha cargado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band" aria-labelledby="accessTitle">
+      <div class="shell feature-grid">
+        <article>
+          <span class="feature-icon" aria-hidden="true">A</span>
+          <h2 id="accessTitle">Accesibilidad desde el diseño</h2>
+          <p>Teclado, lectores de pantalla, contraste, reflow y alternativas al mapa, vídeo y 3D forman parte de la experiencia base.</p>
+        </article>
+        <article>
+          <span class="feature-icon" aria-hidden="true">↧</span>
+          <h2>Ligera y preparada para PWA</h2>
+          <p>La estructura y los contenidos esenciales pueden funcionar tras una visita previa. Los vídeos y modelos 3D no se precargan.</p>
+        </article>
+        <article>
+          <span class="feature-icon" aria-hidden="true">◎</span>
+          <h2>Privacidad por defecto</h2>
+          <p>No requiere cuenta. La posición se usa solo si la pides y no se guarda un historial de coordenadas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="encuesta" aria-labelledby="finishTitle">
+      <div class="finish-card">
+        <p class="eyebrow">CIERRE DE VISITA</p>
+        <h2 id="finishTitle">Cuando termines, cuéntanos tu experiencia</h2>
+        <p>La encuesta definitiva se conectará a la herramienta institucional aprobada para el proyecto.</p>
+        <button class="btn btn-light" id="surveyBtn" type="button">Abrir encuesta</button>
+      </div>
+    </section>
+  </main>
+
+
+  <section class="institutional-support" aria-label="Entidades que financian y desarrollan INNOPAT">
+    <div class="shell institutional-support-inner">
+      <p class="eyebrow dark">INSTITUCIONES DEL PROYECTO</p>
+      <img
+        src="https://parri98.github.io/INNOPAT_Pruebas/assets/brand/logos-junta-financia-desarrolla.jpg"
+        alt="Financia: Junta de Andalucía, Consejería de Sanidad, Presidencia y Emergencias, Centro de Estudios Andaluces. Desarrolla: Junta de Andalucía, Consejería de Cultura y Deporte, Instituto Andaluz del Patrimonio Histórico."
+      >
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <strong>INNOPAT · Guía de visita</strong>
+        <p>Prototipo funcional PWA · Monasterio de Santa María de las Cuevas. · Versión 3.4.0</p>
+      </div>
+      <nav aria-label="Enlaces de pie">
+        <a href="#recorrido">Recorrido</a>
+        <a href="#plano">Plano</a>
+        <button class="link-button" id="a11yOpenFooter" type="button">Accesibilidad</button>
+        <button class="link-button" id="statementOpen" type="button">Declaración de accesibilidad</button>
+        <button class="link-button" id="privacyOpen" type="button">Privacidad</button>
+      </nav>
+      <div class="connection" role="status" aria-live="polite">
+        <span id="onlineDot" class="online-dot"></span>
+        <span id="onlineText">Con conexión</span>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="hitoDialog" class="dialog">
+    <div class="dialog-shell">
+      <button class="dialog-close" type="button" data-close-dialog aria-label="Cerrar">×</button>
+      <p class="eyebrow dark" id="dialogPosition">HITO 1 DE 11</p>
+      <h2 id="dialogTitle">Hito</h2>
+      <p id="dialogSubtitle" class="dialog-subtitle"></p>
+      <p id="dialogSummary" class="dialog-lead"></p>
+
+      <section class="video-block" aria-labelledby="videoTitle">
+        <div class="video-block-head">
+          <span class="detail-kicker">VÍDEO PRINCIPAL</span>
+          <h3 id="videoTitle">Vídeo de la parada</h3>
+          <p class="video-provisional-note">Vídeo provisional común a todas las paradas. Se sustituirá más adelante por el recurso correspondiente.</p>
+        </div>
+        <div class="video-consent" id="videoConsent">
+          <p>El vídeo se sirve desde YouTube. Solo se conectará con esa plataforma cuando decidas reproducirlo.</p>
+          <button class="btn btn-secondary" id="loadVideoBtn" type="button">Cargar vídeo de YouTube</button>
+        </div>
+        <div class="video-responsive" id="videoContainer" hidden>
+        </div>
+      </section>
+
+      <div class="dialog-actions">
+        <button class="btn btn-secondary" id="listenBtn" type="button">Escuchar resumen</button>
+        <button class="btn btn-secondary" id="transcriptBtn" type="button" aria-expanded="false">Ver transcripción</button>
+      </div>
+
+      <div id="transcriptPanel" class="transcript" hidden>
+        <h3>Transcripción</h3>
+        <p id="dialogTranscript"></p>
+      </div>
+
+      <section class="detail-block detail-main">
+        <div class="detail-title-row">
+          <span class="detail-kicker">GUION DE TRABAJO</span>
+          <span class="draft-badge">Borrador · pendiente de validación</span>
+        </div>
+        <h3>Contenido principal</h3>
+        <div id="dialogMainContent"></div>
+      </section>
+
+      <div class="detail-grid">
+        <section class="detail-block detail-science">
+          <span class="detail-kicker">CIENCIA / GEOARQUEOLOGÍA</span>
+          <h3>Una mirada técnica</h3>
+          <p id="dialogScience"></p>
+        </section>
+
+        <section class="detail-block detail-anecdote">
+          <span class="detail-kicker">ANECDOTARIO</span>
+          <h3>Historias para interpretar</h3>
+          <p id="dialogAnecdote"></p>
+        </section>
+      </div>
+
+      <section class="detail-block detail-extra">
+        <span class="detail-kicker">INFORMACIÓN EXTRA / MULTIMEDIA</span>
+        <h3>Explora más</h3>
+        <div id="dialogExtra"></div>
+      </section>
+
+      <section class="detail-block">
+        <h3>Cómo encontrar este lugar</h3>
+        <p id="dialogLocation"></p>
+      </section>
+
+      <section class="detail-block" id="modelBlock" hidden>
+        <h3>Modelo 3D</h3>
+        <p>El visor se activará solo cuando el visitante lo solicite. El modelo definitivo incluirá poster, descripción y alternativa equivalente.</p>
+        <button class="btn btn-secondary" id="modelBtn" type="button">Preparar visor 3D</button>
+        <div id="modelPlaceholder" class="model-placeholder" hidden role="status">Modelo 3D pendiente de incorporar.</div>
+      </section>
+
+      <p class="easy-read-note">Lectura fácil: se habilitará únicamente cuando exista contenido específico validado.</p>
+
+      <div class="dialog-nav">
+        <button id="prevHitoBtn" class="btn btn-ghost-dark" type="button">← Anterior</button>
+        <button id="visitedBtn" class="btn btn-primary" type="button">Marcar como visitado</button>
+        <button id="nextHitoBtn" class="btn btn-ghost-dark" type="button">Siguiente →</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="qrDialog" class="dialog qr-dialog">
+    <div class="dialog-shell">
+      <button class="dialog-close" type="button" data-close-qr aria-label="Cerrar lector QR">×</button>
+      <p class="eyebrow dark">ACCESO A PARADAS</p>
+      <h2>Escanear código QR</h2>
+      <p>Abre la cámara tras tu permiso y apunta al código de una parada. El reconocimiento se procesa en el dispositivo.</p>
+      <section id="qrReader" class="qr-reader" aria-label="Vista de cámara para escanear código QR"></section>
+      <p id="qrStatus" class="helper" role="status">La cámara está apagada.</p>
+      <div class="dialog-actions">
+        <button class="btn btn-primary" id="startQrBtn" type="button">Abrir cámara</button>
+        <button class="btn btn-secondary" id="stopQrBtn" type="button" disabled>Detener cámara</button>
+      </div>
+      <div class="qr-file-fallback">
+        <label for="qrFile"><strong>También puedes elegir una imagen con un QR</strong></label>
+        <input id="qrFile" type="file" accept="image/*" capture="environment">
+      </div>
+      <details class="qr-help">
+        <summary>Formato de los códigos</summary>
+        <p>La app reconoce códigos con <code>H01</code>…<code>H11</code>, <code>hito-01</code>…<code>hito-11</code> o una URL de esta guía que incluya <code>?hito=H01</code>.</p>
+      </details>
+    </div>
+  </dialog>
+
+  <dialog id="a11yPanel" class="dialog a11y-dialog">
+    <div class="dialog-shell">
+      <button class="dialog-close" type="button" data-close-a11y aria-label="Cerrar">×</button>
+      <p class="eyebrow dark">PREFERENCIAS</p>
+      <h2>Accesibilidad</h2>
+      <p>Estas opciones complementan una interfaz que ya debe ser accesible de base.</p>
+
+      <div class="pref-list">
+        <label class="switch-row">
+          <span><strong>Texto grande</strong><small>Aumenta el tamaño general del texto.</small></span>
+          <input type="checkbox" id="prefLargeText">
+        </label>
+        <label class="switch-row">
+          <span><strong>Alto contraste</strong><small>Refuerza fondos, bordes y contraste visual.</small></span>
+          <input type="checkbox" id="prefContrast">
+        </label>
+        <label class="switch-row">
+          <span><strong>Subrayar enlaces</strong><small>Hace más evidente qué elementos son enlaces.</small></span>
+          <input type="checkbox" id="prefUnderline">
+        </label>
+        <label class="switch-row">
+          <span><strong>Reducir movimiento</strong><small>Minimiza animaciones y transiciones no esenciales.</small></span>
+          <input type="checkbox" id="prefMotion">
+        </label>
+      </div>
+      <button id="resetPrefs" class="btn btn-secondary" type="button">Restablecer preferencias</button>
+    </div>
+  </dialog>
+
+  <dialog id="noticeDialog" class="dialog small-dialog">
+    <div class="dialog-shell">
+      <button class="dialog-close" type="button" data-close-notice aria-label="Cerrar">×</button>
+      <h2 id="noticeTitle">Información</h2>
+      <p id="noticeText"></p>
+    </div>
+  </dialog>
+
+  <dialog id="infoDialog" class="dialog">
+    <div class="dialog-shell">
+      <button class="dialog-close" type="button" data-close-info aria-label="Cerrar">×</button>
+      <h2 id="infoTitle">Información</h2>
+      <div id="infoContent"></div>
+    </div>
+  </dialog>
+
+  <script src="./config.js"></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>
